@@ -20,6 +20,7 @@ const getAuthorDetails = async (firebaseKey) => {
 const deleteAuthorBooksRelationship = (firebaseKey) => new Promise((resolve, reject) => {
   getAuthorBooks(firebaseKey).then((authorsBookArray) => {
     const deleteBookPromises = authorsBookArray.map((book) => deleteBook(book.firebaseKey));
+
     Promise.all(deleteBookPromises).then(() => {
       deleteSingleAuthor(firebaseKey).then(resolve);
     });
